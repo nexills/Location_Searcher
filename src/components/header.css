@@ -1,0 +1,12 @@
+#header {
+    position: fixed;
+    width: 100vw;
+    height: 6vw;
+    background-color: darkblue;
+    z-index:1000;
+}
+#header_block {
+    width: 100vw;
+    height: 6vw;
+    z-index:1000;
+}
