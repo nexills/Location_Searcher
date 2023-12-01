@@ -8,7 +8,7 @@ function Main() {
         <div>
             <Routes>
                 <Route path='/' element={<Home/>}></Route>
-                <Route path='/result' element={<Result/>}></Route>
+                <Route path='/result/:location' element={<Result/>}></Route>
             </Routes>
         </div>
     );

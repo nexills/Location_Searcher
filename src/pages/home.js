@@ -1,38 +1,19 @@
 import React from 'react';
 import {useState} from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../components/header.js';
 import search_icon from '../assets/search_icon.png';
 import './home.css';
 
 function Home() {
-    const [searchval, setSearch] = useState();
+    const [searchval, setSearch] = useState(" ");
     function handleChange(event) {
-        setSearch(event.target.value);
+        var temp = event.target.value.trim();
+        temp = temp.replaceAll(" ", "!");
+        console.log(temp);
+        setSearch(temp);
     }
 
-    async function search() {
-        try {
-            var locationstring = searchval.trim();
-            locationstring = locationstring.replace(" ", "%20");
-            console.log(locationstring);
-
-            fetch("https://us1.locationiq.com/v1/search?key=pk.5656ae4179330b525702ad97ed3ba00e\
-            &format=json&q=" + locationstring)
-            .then((response) => {
-                console.log(response);
-                return response.json();
-            })
-            .then((geolocation) => {
-                // an array of json objects are returned
-                // display all of them on result page
-                console.log(geolocation);
-                console.log(geolocation[0]["display_name"]);
-            });
-        } catch (error) {
-            console.log("Error: API went wrong");
-            console.log(error);
-        }
-    }
 
     return (
         <div style={{textAlign: "center", overflowX: "hidden"}}>
@@ -45,9 +26,9 @@ function Home() {
                         type="text" 
                         placeholder='Search a place to get started:'
                         onChange={handleChange}></input>
-                        <button onClick={search}>
+                        <Link to={"/result/"+ searchval}>
                             <img src={search_icon} width="40px" height="40px"></img>
-                        </button>
+                        </Link>
                     </div>
                 </section>
             </div>
