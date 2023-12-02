@@ -10,7 +10,6 @@ function Home() {
     function handleChange(event) {
         var temp = event.target.value.trim();
         temp = temp.replaceAll(" ", "!");
-        console.log(temp);
         setSearch(temp);
     }
 

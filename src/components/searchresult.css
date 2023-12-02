@@ -1,0 +1,13 @@
+.searchcard {
+    width: 70vw;
+    height: 25vh;
+    background-color: bisque;
+    margin: 30px auto 30px auto;
+    font-size: 32px;
+    border-radius: 12px;
+    box-shadow: 7px 7px 5px darkgrey;
+
+}
+.card_text {
+    margin: 20px;
+}
