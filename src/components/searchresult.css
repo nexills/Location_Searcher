@@ -3,11 +3,18 @@
     height: 25vh;
     background-color: bisque;
     margin: 30px auto 30px auto;
-    font-size: 32px;
     border-radius: 12px;
     box-shadow: 7px 7px 5px darkgrey;
-
+    
 }
 .card_text {
+    font-size: 27px;
     margin: 20px;
+}
+.sm_card_text {
+    font-size: 18px;
+    margin: 20px;
+}
+.link {
+   text-decoration: 'none';
 }

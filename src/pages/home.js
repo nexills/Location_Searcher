@@ -25,7 +25,7 @@ function Home() {
                         type="text" 
                         placeholder='Search a place to get started:'
                         onChange={handleChange}></input>
-                        <Link to={"/result/"+ searchval}>
+                        <Link to={"/search/"+ searchval}>
                             <img src={search_icon} width="40px" height="40px"></img>
                         </Link>
                     </div>

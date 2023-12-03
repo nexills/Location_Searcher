@@ -2,25 +2,22 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Header from '../components/header.js';
-import Searchcard from '../components/searchresult.js';
 
 function Result() {
     const { location } = useParams();
-    var locationstring = location.replaceAll("!", "%20");
-    const [geo, geochange] = useState();
+    const [weather, weatherchange] = useState();
+    const info = location.split('&');
 
     useEffect(() => {
         try {
-
-            fetch("https://us1.locationiq.com/v1/search?key=pk.5656ae4179330b525702ad97ed3ba00e\
-            &format=json&q=" + locationstring)
+            fetch("https://api.open-meteo.com/v1/forecast?latitude=" + info[1] +
+            "&longitude=" + info[2] + "&hourly=temperature_2m")
             .then((response) => {
                 return response.json();
             })
-            .then((geolocation) => {
-                for(let i = 0; i < geolocation.length; i++) {
-                }
-                geochange(geolocation);
+            .then((forecast) => {
+                console.log(forecast);
+                weatherchange(forecast);
             });
         } catch (error) {
             console.log("Error: API call was not received");
@@ -30,15 +27,6 @@ function Result() {
     return (
         <div>
             <Header/>
-            <h2>Search Result</h2>
-            <hr/>
-            <div>
-                {geo ? (
-                    geo.map((x) => <Searchcard key={x.place_id} data={x} />)
-                ) : (
-                    <p>Loading...</p>
-                )}
-            </div>
         </div>
     );
 }
