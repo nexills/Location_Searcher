@@ -25,7 +25,14 @@ function Search() {
                         parseFloat(geolocation[j]["lat"]).toFixed(2) &&
                         parseFloat(geolocation[i]["lon"]).toFixed(2) == 
                         parseFloat(geolocation[j]["lon"]).toFixed(2) ) {
-                            geolocation.splice(j, 1);
+                            // choose the one with a shorter name
+                            if (geolocation[i]["display_name"].length < 
+                            geolocation[j]["display_name"].length) {
+                                geolocation.splice(j, 1);
+                            } else {
+                                geolocation.splice(i, 1);
+                                i--;
+                            }
                         }
                     }
                 }
