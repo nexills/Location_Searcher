@@ -1,4 +1,13 @@
 .graph{
-    width: 50vw;
+    width: 40vw;
     height: 40vh;
+    margin: auto;
+}
+#resultcontainer{
+    width: 75vw;
+    background-color: aqua;
+    border-radius: 10px;
+    box-shadow: 6px 6px 5px black;
+    margin: 10px auto 10px auto;
+    padding: 10px;
 }

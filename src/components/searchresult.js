@@ -6,7 +6,7 @@ function Searchcard(props) {
     const {data} = props;
     return (
         <Link style={{ textDecoration: 'none', color: 'inherit' }}
-        to={"/result/"+ data["display_name"] + "&" +
+        to={"/result/"+ data["display_name"].replaceAll(" ", "_") + "&" +
         parseFloat(data["lat"]).toFixed(2)+"&"+parseFloat(data["lon"]).toFixed(2)}>
             <div className="searchcard">
                 <p className="card_text">{data["display_name"]}</p>

@@ -21,17 +21,17 @@ function Search() {
                 // remove location that are close enough to basically be the same location
                 for(let i = 0; i < geolocation.length; i++) {
                     for (let j = i+1; j < geolocation.length; j++) {
-                        if (parseFloat(geolocation[i]["lat"]).toFixed(2) == 
-                        parseFloat(geolocation[j]["lat"]).toFixed(2) &&
-                        parseFloat(geolocation[i]["lon"]).toFixed(2) == 
-                        parseFloat(geolocation[j]["lon"]).toFixed(2) ) {
+                        if (parseFloat(geolocation[i]["lat"]).toFixed(1) == 
+                        parseFloat(geolocation[j]["lat"]).toFixed(1) &&
+                        parseFloat(geolocation[i]["lon"]).toFixed(1) == 
+                        parseFloat(geolocation[j]["lon"]).toFixed(1) ) {
                             // choose the one with a shorter name
                             if (geolocation[i]["display_name"].length < 
                             geolocation[j]["display_name"].length) {
                                 geolocation.splice(j, 1);
                             } else {
                                 geolocation.splice(i, 1);
-                                i--;
+                                j = i+1;
                             }
                         }
                     }
