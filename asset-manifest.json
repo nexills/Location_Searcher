@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/Location_Searcher/static/css/main.534d3f0a.css",
+    "main.js": "/Location_Searcher/static/js/main.673b05a3.js",
+    "static/media/worldmap.png": "/Location_Searcher/static/media/worldmap.d40d7a92d0a528d3dad1.png",
+    "static/media/search_icon.png": "/Location_Searcher/static/media/search_icon.248f67053fa28c7d30bb.png",
+    "index.html": "/Location_Searcher/index.html",
+    "main.534d3f0a.css.map": "/Location_Searcher/static/css/main.534d3f0a.css.map",
+    "main.673b05a3.js.map": "/Location_Searcher/static/js/main.673b05a3.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.534d3f0a.css",
+    "static/js/main.673b05a3.js"
+  ]
+}
