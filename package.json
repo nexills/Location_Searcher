@@ -22,7 +22,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "homepage": "https://nexills.github.io/Location_Searcher",
+  "homepage": "http://nexills.github.io/Location_Searcher",
   "eslintConfig": {
     "extends": [
       "react-app",
