@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 
 function Time(props) {
     const {offset} = props;
-    const {condition} = props;
     const [time, timechange] = useState(0);
 
     useEffect(() => {

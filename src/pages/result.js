@@ -6,6 +6,8 @@ import { useParams } from 'react-router-dom';
 import Header from '../components/header.js';
 import Time from '../components/time.js';
 import Current from '../components/current.js';
+import Currency from '../components/currency.js';
+import Country from '../components/country.js';
 import './result.css';
 
 function Result() {
@@ -21,7 +23,7 @@ function Result() {
     , 'CAD', 'CNY', 'HKD', 'IDR', 'ILS', 'INR', 'KRW', 'MXN', 'MYR', 'NZD', 'PHP', 'SGD'
     , 'THB', 'ZAR']
 
-
+    
     useEffect(() => {
         try {
             fetch("https://api.open-meteo.com/v1/forecast?latitude=" + info[1] +
@@ -75,9 +77,19 @@ function Result() {
             })
             .then((country_data) => {
                 console.log(country_data);
-                countrychange(country_data);
+                // if multiple responses, choose the best one
+                var index = 0;
+                if (country_data.length > 1) {
+                    for (var i = 0; i < country_data.length; i++) {
+                        if (country_name === country_data[i].name.common) {
+                            index = i;
+                            break;
+                        }
+                    }
+                }
+                countrychange(country_data.slice(index,index+1));
                 // get the name of the currency
-                var keys = Object.keys(country_data[0]["currencies"]);
+                var keys = Object.keys(country_data[index]["currencies"]);
                 console.log(keys[0]);  
 
                 if (supported_currency.includes(keys[0])) {
@@ -88,8 +100,9 @@ function Result() {
                     })
                     .then((currency) => {
                         currencychange([currency["data"][keys[0]], keys[0]]);
-                        console.log(currency["data"][keys[0]]);
                     })
+                } else {
+                    currencychange([{}, keys[0]]);
                 }
             })
 
@@ -112,26 +125,17 @@ function Result() {
                             <label>{country[0]["flag"]}</label>)}</h2>
                         <section className='leftfloat'>
                             <Current condition={weather["current"]}/>
-                            {currency?( 
-                                currency[1] != "CAD" ? (
-                                <div>
-                                    <p>Local currency: {currency[1]}</p>
-                                    <p>Exchange rate: 1 CAD = {currency[0].toFixed(3)} {currency[1]}</p>
-                                </div>
-                            ): (
-                                <p>Local currency: {currency[1]}</p>
-                                )
-                            ):(<div></div>)}
+                            <Currency currency={currency}/>
                         </section>
                         <section className='rightfloat'>
-                            <p className="centre"> {weather["timezone_abbreviation"] + " (GMT"}
-                            {weather["utc_offset_seconds"] >= 0 ? 
-                            "+"+parseInt(weather["utc_offset_seconds"]/3600)+")":
-                            parseInt(weather["utc_offset_seconds"]/3600)+")"}
+                            <p className="centre"> {weather.timezone_abbreviation + " (GMT"}
+                            {weather.utc_offset_seconds >= 0 ? 
+                            "+"+parseInt(weather.utc_offset_seconds/3600)+")":
+                            parseInt(weather.utc_offset_seconds/3600)+")"}
                             </p>
-                            <Time offset={weather["utc_offset_seconds"]}/>
-                            <p className='leftfloat'>{weather["daily"]["sunrise"][0].slice(11,16)}<br/>Sunrise</p>
-                            <p className='rightfloat'>{weather["daily"]["sunset"][0].slice(11,16)}<br/>Sunset</p>
+                            <Time offset={weather.utc_offset_seconds}/>
+                            <p className='leftfloat'>{weather.daily.sunrise[0].slice(11,16)}<br/>Sunrise</p>
+                            <p className='rightfloat'>{weather.daily.sunset[0].slice(11,16)}<br/>Sunset</p>
                         </section>
                         <section className='graph'>
                             <Line data={temp_data} options={{
@@ -166,6 +170,9 @@ function Result() {
                               }
                             }
                             }}/></section>
+                        <section id="rule">
+                            {country ? (<Country country={country[0]}/>) : (<div></div>)}
+                        </section>
                     </div>
                 )}
             </div>

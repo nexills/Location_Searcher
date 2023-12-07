@@ -24,3 +24,6 @@
 .centre {
     text-align: center;
 }
+#rule {
+    clear: both;
+}
