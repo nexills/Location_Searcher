@@ -21,15 +21,9 @@ function Search() {
                 // remove location that are close enough to basically be the same location
                 for(let i = 0; i < geolocation.length; i++) {
                     for (let j = i+1; j < geolocation.length; j++) {
-<<<<<<< HEAD
                         if (parseFloat(geolocation[i]["lat"]).toFixed(1) ===
                         parseFloat(geolocation[j]["lat"]).toFixed(1) &&
                         parseFloat(geolocation[i]["lon"]).toFixed(1) === 
-=======
-                        if (parseFloat(geolocation[i]["lat"]).toFixed(1) == 
-                        parseFloat(geolocation[j]["lat"]).toFixed(1) &&
-                        parseFloat(geolocation[i]["lon"]).toFixed(1) == 
->>>>>>> e262ed2f1a4d523193b9d1fb5b1302c727202f4d
                         parseFloat(geolocation[j]["lon"]).toFixed(1) ) {
                             // choose the one with a shorter name
                             if (geolocation[i]["display_name"].length < 

@@ -1,10 +1,9 @@
 .infobox {
-    margin: 40px auto 0px auto;
-    background-color: lightgrey;
+    margin: 140px auto 0px auto;
+    background-color: rgb(170, 170, 170);
     width: 40vw;
     height: 20vw;
-    border-radius: 6px;
-    box-shadow: 5px 5px 5px darkgrey;
+    border-radius: 10px;
     text-align: center;
     display: flex;
 
@@ -13,9 +12,31 @@
 }
 .background {
     background: url(../assets/worldmap.png) no-repeat center fixed;
-    background-size: contain;
+    background-size: cover;
     height: 100vh;
     width: 100vw;
-    backdrop-filter: blur(5px);
     display: inline-block;
+}
+
+input {
+    width: 20vw;
+    height: 40px;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+    font-size: 20px;
+    margin-top: 0;
+    margin-bottom: 60px;
+    vertical-align: top;
+    background-color: rgb(216, 216, 216);
+    
+    border: none;
+    outline: none;
+  }
+#search {
+    display: inline-block;
+    width: 60px;
+    height: 42px;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: rgb(32, 32, 32);
 }

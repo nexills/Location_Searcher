@@ -4,6 +4,7 @@
     height: 6vw;
     background-color: darkblue;
     z-index:1000;
+    border-bottom: 3px solid dimgray;
 }
 #header_block {
     width: 100vw;

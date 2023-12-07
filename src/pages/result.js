@@ -4,6 +4,8 @@ import { Line } from 'react-chartjs-2';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Header from '../components/header.js';
+import Time from '../components/time.js';
+import Current from '../components/current.js';
 import './result.css';
 
 function Result() {
@@ -19,12 +21,13 @@ function Result() {
     , 'CAD', 'CNY', 'HKD', 'IDR', 'ILS', 'INR', 'KRW', 'MXN', 'MYR', 'NZD', 'PHP', 'SGD'
     , 'THB', 'ZAR']
 
+
     useEffect(() => {
         try {
             fetch("https://api.open-meteo.com/v1/forecast?latitude=" + info[1] +
-            "&longitude=" + info[2] + "&current=temperature_2m,relative_humidity_2m,"+
+            "&longitude=" + info[2] + "&current=temperature_2m,relative_humidity_2m,weather_code,"+
             "apparent_temperature,precipitation&daily=temperature_2m_max,temperature_2m_min,"+
-            "sunrise,sunset,daylight_duration&timezone=auto")
+            "sunrise,sunset,daylight_duration&timezone=auto&forecast_days=14")
             .then((response) => {
                 return response.json();
             })
@@ -52,17 +55,19 @@ function Result() {
                         },
                     ],
                 });
+                console.log(forecast);
                 weatherchange(forecast);
             });
         } catch (error) {
             console.log("Error: API call was not resolved");
             console.log(error);
         }}, []);
-    
+        
     useEffect(() => {
         try {
-            var country_name = info[0].split("_");
+            var country_name = info[0].split(",");
             country_name = country_name[country_name.length - 1];
+            country_name = country_name.replaceAll("_", " ").trim();
             console.log(country_name);
             fetch("https://restcountries.com/v3.1/name/"+country_name)
             .then((response) => {
@@ -94,6 +99,8 @@ function Result() {
             console.log(error);
         }
     }, [])
+    
+
 
     return (
         <div>
@@ -101,16 +108,31 @@ function Result() {
             <div>
                 {!weather? (<p>Loading...</p>): (
                     <div id="resultcontainer">
-                        <h2>{info[0].replaceAll("_", " ")}</h2>
-                        <p>Current Temperature: {weather["current"]["temperature_2m"]}°C</p>
-                        <p>Feels like {weather["current"]["apparent_temperature"]}°C</p>
-                        <p>Relative humidity: {weather["current"]["relative_humidity_2m"]}%</p>
-                        {!country? (<p>Loading...</p>): (
-                            <p>{country[0]["flag"]}</p>
-                        )}
-                        {currency?(
-                            <p>Exchange rate: 1 CAD = {currency[0]} {currency[1]}</p>
-                        ):(<div></div>)}
+                        <h2>{info[0].replaceAll("_", " ")} {!country? (<label></label>): (
+                            <label>{country[0]["flag"]}</label>)}</h2>
+                        <section className='leftfloat'>
+                            <Current condition={weather["current"]}/>
+                            {currency?( 
+                                currency[1] != "CAD" ? (
+                                <div>
+                                    <p>Local currency: {currency[1]}</p>
+                                    <p>Exchange rate: 1 CAD = {currency[0].toFixed(3)} {currency[1]}</p>
+                                </div>
+                            ): (
+                                <p>Local currency: {currency[1]}</p>
+                                )
+                            ):(<div></div>)}
+                        </section>
+                        <section className='rightfloat'>
+                            <p className="centre"> {weather["timezone_abbreviation"] + " (GMT"}
+                            {weather["utc_offset_seconds"] >= 0 ? 
+                            "+"+parseInt(weather["utc_offset_seconds"]/3600)+")":
+                            parseInt(weather["utc_offset_seconds"]/3600)+")"}
+                            </p>
+                            <Time offset={weather["utc_offset_seconds"]}/>
+                            <p className='leftfloat'>{weather["daily"]["sunrise"][0].slice(11,16)}<br/>Sunrise</p>
+                            <p className='rightfloat'>{weather["daily"]["sunset"][0].slice(11,16)}<br/>Sunset</p>
+                        </section>
                         <section className='graph'>
                             <Line data={temp_data} options={{
                                 plugins: {
@@ -126,14 +148,20 @@ function Result() {
                               y: {
                                 beginAtZero: true,
                                 title: {
-                                  display: true,
-                                  text: 'Temperature'
+                                    display: true,
+                                    text: 'Temperature'
+                                },
+                                grid: {
+                                    display: false
                                 }
                               },
                               x: {
                                 title: {
-                                  display: true,
-                                  text: 'Date'
+                                    display: true,
+                                    text: 'Date'
+                                },
+                                grid: {
+                                    display: false
                                 }
                               }
                             }

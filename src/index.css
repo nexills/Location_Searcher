@@ -22,13 +22,3 @@ h2 {
   margin: auto 10px auto 10px;
 }
 
-input {
-  width: 20vw;
-  height: 40px;
-  border-radius: 10px;
-  font-size: 20px;
-  margin-top: 0;
-  margin-bottom: 60px;
-  vertical-align: top;
-  background-color: grey;
-}

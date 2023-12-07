@@ -1,13 +1,26 @@
 .graph{
+    float: left;
     width: 40vw;
     height: 40vh;
-    margin: auto;
+    margin: 20px 30px 20px 30px;
 }
 #resultcontainer{
     width: 75vw;
+    height: 80vh;
     background-color: aqua;
     border-radius: 10px;
     box-shadow: 6px 6px 5px black;
     margin: 10px auto 10px auto;
     padding: 10px;
+}
+.leftfloat {
+    float: left;
+    margin: 10px;
+}
+.rightfloat {
+    float: right;
+    margin: 10px;
+}
+.centre {
+    text-align: center;
 }
