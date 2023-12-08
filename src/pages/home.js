@@ -19,6 +19,7 @@ function Home() {
             <Header/>
             <div className='background'>
                 <section className='infobox'>
+                    
                     <h2>Welcome!</h2>
                     <div>
                         <input id="input"

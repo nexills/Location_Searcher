@@ -16,6 +16,7 @@ function Result() {
     const [temp_data, data_change] = useState();
     const [currency, currencychange] = useState();
     const [country, countrychange] = useState();
+    const [display, changedisplay] = useState("Weather");
     const info = location.split('&');
 
     const supported_currency = ['EUR', 'USD', 'JPY', 'BGN', 'CZK', 'DKK', 'GBP'
@@ -26,6 +27,7 @@ function Result() {
     
     useEffect(() => {
         try {
+            console.log("Calling API");
             fetch("https://api.open-meteo.com/v1/forecast?latitude=" + info[1] +
             "&longitude=" + info[2] + "&current=temperature_2m,relative_humidity_2m,weather_code,"+
             "apparent_temperature,precipitation&daily=temperature_2m_max,temperature_2m_min,"+
@@ -57,7 +59,6 @@ function Result() {
                         },
                     ],
                 });
-                console.log(forecast);
                 weatherchange(forecast);
             });
         } catch (error) {
@@ -70,7 +71,6 @@ function Result() {
             var country_name = info[0].split(",");
             country_name = country_name[country_name.length - 1];
             country_name = country_name.replaceAll("_", " ").trim();
-            console.log(country_name);
             fetch("https://restcountries.com/v3.1/name/"+country_name)
             .then((response) => {
                 return response.json();
@@ -90,7 +90,6 @@ function Result() {
                 countrychange(country_data.slice(index,index+1));
                 // get the name of the currency
                 var keys = Object.keys(country_data[index]["currencies"]);
-                console.log(keys[0]);  
 
                 if (supported_currency.includes(keys[0])) {
                     fetch("https://api.freecurrencyapi.com/v1/latest?apikey=fca_live_Bs4cRDRARUX3w1aGLxlc"+
@@ -109,35 +108,34 @@ function Result() {
             
         } catch (error) {
             console.log("Error: API call was not resolved");
-            console.log(error);
         }
     }, [])
+
+    var show = (event) => {
+        changedisplay(event.target.value);
+    }
     
 
 
     return (
         <div>
             <Header/>
+            <div id="select">
+                <button onClick={show} value="Weather" className='selectbutton'>Weather</button>
+                <button onClick={show} value="Currency" className='selectbutton'>Currency</button>
+                <button onClick={show} value="Timezone" className='selectbutton'>Timezone</button>
+                <button onClick={show} value="Info" className='selectbutton'>Info</button>
+            </div>
             <div>
                 {!weather? (<p>Loading...</p>): (
                     <div id="resultcontainer">
                         <h2>{info[0].replaceAll("_", " ")} {!country? (<label></label>): (
                             <label>{country[0]["flag"]}</label>)}</h2>
-                        <section className='leftfloat'>
-                            <Current condition={weather["current"]}/>
-                            <Currency currency={currency}/>
-                        </section>
-                        <section className='rightfloat'>
-                            <p className="centre"> {weather.timezone_abbreviation + " (GMT"}
-                            {weather.utc_offset_seconds >= 0 ? 
-                            "+"+parseInt(weather.utc_offset_seconds/3600)+")":
-                            parseInt(weather.utc_offset_seconds/3600)+")"}
-                            </p>
-                            <Time offset={weather.utc_offset_seconds}/>
-                            <p className='leftfloat'>{weather.daily.sunrise[0].slice(11,16)}<br/>Sunrise</p>
-                            <p className='rightfloat'>{weather.daily.sunset[0].slice(11,16)}<br/>Sunset</p>
-                        </section>
-                        <section className='graph'>
+                        {/*Choosing what to display based on current page */}
+                        {display === "Weather"? (
+                        <div>
+                            <Current condition={weather["current"]}/>                       
+                            <section className='graph'>
                             <Line data={temp_data} options={{
                                 plugins: {
                                 title: {
@@ -170,9 +168,21 @@ function Result() {
                               }
                             }
                             }}/></section>
-                        <section id="rule">
-                            {country ? (<Country country={country[0]}/>) : (<div></div>)}
-                        </section>
+                        </div>
+                        ):
+                            (display === "Currency" ?
+                            <Currency currency={currency}/>: (
+                                display === "Timezone" ?
+                                <Time offset={weather.utc_offset_seconds} 
+                                    timezone={weather.timezone_abbreviation}
+                                    sunrise={weather.daily.sunrise}
+                                    sunset={weather.daily.sunset}/>: (
+                                        country ? (<Country country={country[0]}/>) : (<div></div>)
+                                    )
+                                )
+                            )
+                        }
+                        <div className="clearer"/>
                     </div>
                 )}
             </div>

@@ -1,0 +1,9 @@
+#dropdown {
+    width: 75%;
+    height: 3vh;
+}
+#flag {
+    float: right;
+    width: 100%;
+    max-width: 30vw;
+}

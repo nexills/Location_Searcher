@@ -1,12 +1,10 @@
 .graph{
-    float: left;
     width: 40vw;
     height: 40vh;
     margin: 20px 30px 20px 30px;
 }
 #resultcontainer{
     width: 75vw;
-    height: 80vh;
     background-color: aqua;
     border-radius: 10px;
     box-shadow: 6px 6px 5px black;
@@ -21,9 +19,23 @@
     float: right;
     margin: 10px;
 }
-.centre {
-    text-align: center;
-}
-#rule {
+.clearer {
     clear: both;
+}
+.selectbutton {
+    width: 8vw;
+    height: 3vw;
+    background-color: antiquewhite;
+    float: left;
+    border: none;
+    outline: none;
+}
+.selectbutton:hover {
+    background-color: grey;
+}
+#select {
+    width: 100%;
+    height: 3vw;
+    padding-left: 15%;
+    background-color: rgb(206, 206, 206);
 }

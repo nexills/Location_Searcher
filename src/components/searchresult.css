@@ -7,6 +7,9 @@
     box-shadow: 7px 7px 5px darkgrey;
     
 }
+.searchcard:hover {
+    background-color: rgb(203, 161, 110);
+}
 .card_text {
     font-size: 27px;
     margin: 20px;

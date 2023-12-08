@@ -38,5 +38,8 @@ input {
     height: 42px;
     border-bottom-right-radius: 10px;
     border-top-right-radius: 10px;
-    background-color: rgb(32, 32, 32);
+    background-color: rgb(62, 62, 62);
+}
+#search:hover {
+    background-color: black;
 }

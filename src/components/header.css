@@ -1,13 +1,40 @@
 #header {
     position: fixed;
     width: 100vw;
-    height: 6vw;
+    height: 12vh;
     background-color: darkblue;
     z-index:1000;
     border-bottom: 3px solid dimgray;
 }
 #header_block {
     width: 100vw;
-    height: 6vw;
+    height: 12vh;
     z-index:1000;
+}
+#headerinput {
+    width: 16vw;
+    height: 20px;
+    border-bottom-left-radius: 7px;
+    border-top-left-radius: 7px;
+    font-size: 14px;
+    margin: auto;
+    background-color: rgb(216, 216, 216);
+    border: none;
+    outline: none;
+}
+#headsearch {
+    display: inline-block;
+    width: 30px;
+    height: 21px;
+    border-bottom-right-radius: 7px;
+    border-top-right-radius: 7px;
+    background-color: rgb(62, 62, 62);
+}
+#headsearch:hover {
+    background-color: black;
+}
+#smallsearch {
+    float: right;
+    margin-top: 4.5vh;
+    margin-right: 5vw;
 }
