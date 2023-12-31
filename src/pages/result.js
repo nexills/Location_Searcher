@@ -27,7 +27,6 @@ function Result() {
     
     useEffect(() => {
         try {
-            console.log("Calling API");
             fetch("https://api.open-meteo.com/v1/forecast?latitude=" + info[1] +
             "&longitude=" + info[2] + "&current=temperature_2m,relative_humidity_2m,weather_code,"+
             "apparent_temperature,precipitation&daily=temperature_2m_max,temperature_2m_min,"+
@@ -76,7 +75,6 @@ function Result() {
                 return response.json();
             })
             .then((country_data) => {
-                console.log(country_data);
                 // if multiple responses, choose the best one
                 var index = 0;
                 if (country_data.length > 1) {

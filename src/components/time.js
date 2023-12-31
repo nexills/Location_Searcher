@@ -23,24 +23,42 @@ function Time(props) {
 
     function localChange(event) {
         var newinput = event.target.value;
-        if (newinput > 0 && newinput < 2400) {
+        if (newinput >= 0 && newinput < 2400 && newinput.length <= 4) {
             localchange(newinput);
             if (newinput.length === 4) {
-                var minute = (newinput%100+60+difference%60)%60;
-                var hour = (parseInt(newinput/100)+48+parseInt(difference/60))%24;
-                clientchange(String(hour*100+minute).padStart(4,'0'));
+                var minute = (newinput%100+60-difference%60)%60;
+                var hour = parseInt(newinput/100)+48-parseInt(difference/60);
+                if (hour >= 72) {
+                    hour = hour%24;
+                    clientchange(String(hour*100+minute).padStart(4,'0')+"⁺¹");
+                } else if (hour < 48) {
+                    hour = hour%24;
+                    clientchange(String(hour*100+minute).padStart(4,'0')+"⁻¹");
+                } else {
+                    hour = hour%24;
+                    clientchange(String(hour*100+minute).padStart(4,'0'));
+                }
         }
         }
     }
 
     function clientChange(event) {
         var newinput = event.target.value;
-        if (newinput > 0 && newinput < 2400) {
+        if (newinput >= 0 && newinput < 2400 && newinput.length <= 4) {
             clientchange(newinput);
             if (newinput.length === 4) {
-                var minute = (newinput%100+60-difference%60)%60;
-                var hour = (parseInt(newinput/100)+48-parseInt(difference/60))%24;
-                localchange(String(hour*100+minute).padStart(4,'0'));
+                var minute = (newinput%100+60+difference%60)%60;
+                var hour = parseInt(newinput/100)+48+parseInt(difference/60);
+                if (hour >= 72) {
+                    hour = hour%24;
+                    localchange(String(hour*100+minute).padStart(4,'0')+"⁺¹");
+                } else if (hour < 48) {
+                    hour = hour%24;
+                    localchange(String(hour*100+minute).padStart(4,'0')+"⁻¹");
+                } else {
+                    hour = hour%24;
+                    localchange(String(hour*100+minute).padStart(4,'0'));
+                }
             }
         }
     }
@@ -74,8 +92,8 @@ function Time(props) {
             <label className='leftfloat'>Your timezone</label>
             <label className='rightfloat'>This timezone</label>
             <br/> <br/>
-            <input onChange={localChange} value={local} className='leftinput'></input>
-            <input onChange={clientChange} value={client} className='rightinput'></input>
+            <input onChange={clientChange} value={client} className='leftinput'></input>
+            <input onChange={localChange} value={local} className='rightinput'></input>
         </div>
     </div>
     );

@@ -1,18 +1,19 @@
 # Location_Searcher
-Planned features:
-- current weather display
+Current features
+- searching locations
+- current weather conditions and future forecast
 - timezone and timezone converter
 - currency display and currency converter
-- country information
+- country information of the location
 
 # API Used
-Used for searching location and geocoding
+For searching location and geocoding
 https://locationiq.com/demo
 For getting weather forecast
 https://open-meteo.com/en/docs#current=
 For getting country information
 https://restcountries.com/
-To get currency information
+For getting currency information
 https://freecurrencyapi.com/
 
 # Build Instructions
