@@ -2,3 +2,36 @@
 .centre {
     text-align: center;
 }
+
+@font-face{
+    font-family:'clock';
+    src: url('../assets/digital-7.ttf');
+}
+
+.digital_clock {
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-family: clock;
+    font-size: 40px;
+}
+.center {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 10px auto 10px auto;
+    align-items: center;
+    gap: 10%;
+}
+.calculator {
+    width: 25vw;
+    height: 15vh;
+    margin: auto;
+}
+#localtime {
+    width: 80px;
+}
+#clienttime {
+    width: 80px;
+}

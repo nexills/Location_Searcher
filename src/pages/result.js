@@ -123,7 +123,7 @@ function Result() {
             <div id="select">
                 <button onClick={show} value="Weather" className='selectbutton'>Weather</button>
                 <button onClick={show} value="Currency" className='selectbutton'>Currency</button>
-                <button onClick={show} value="Timezone" className='selectbutton'>Timezone</button>
+                <button onClick={show} value="Timezone" className='selectbutton'>Time</button>
                 <button onClick={show} value="Info" className='selectbutton'>Info</button>
             </div>
             <div>

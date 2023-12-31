@@ -1,6 +1,15 @@
 #dropdown {
-    width: 75%;
+    width: 30vw;
     height: 3vh;
+    border-radius: 0px;
+    background-color: white;
+    border: 0px;
+    margin-bottom: 0px;
+}
+#dropdowninfo {
+    margin-top: 0px;
+    margin-left: 20px;
+    width: 30vw;
 }
 #flag {
     float: right;
