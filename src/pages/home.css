@@ -18,7 +18,7 @@
     display: inline-block;
 }
 
-input {
+#input {
     width: 20vw;
     height: 40px;
     border-bottom-left-radius: 10px;

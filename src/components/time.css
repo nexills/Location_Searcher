@@ -29,9 +29,27 @@
     height: 15vh;
     margin: auto;
 }
-#localtime {
-    width: 80px;
+.leftinput {
+    float: left;
+    width: 100px;
+    height: 40px;
+    font-size: 20px;
+    margin-top: 0;
+    margin-bottom: 60px;
+    vertical-align: top;
+    background-color: lightblue;
+    text-align: right;
+    border: none;
 }
-#clienttime {
-    width: 80px;
+.rightinput {
+    float: right;
+    width: 100px;
+    height: 40px;
+    font-size: 20px;
+    text-align: right;
+    margin-top: 0;
+    margin-bottom: 60px;
+    vertical-align: top;
+    background-color: lightblue;
+    border: none;
 }

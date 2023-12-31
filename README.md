@@ -1,9 +1,9 @@
 # Location_Searcher
 Planned features:
 - current weather display
-- display climate
-- display currency
-- search for flights
+- timezone and timezone converter
+- currency display and currency converter
+- country information
 
 # API Used
 Used for searching location and geocoding
@@ -16,8 +16,6 @@ To get currency information
 https://freecurrencyapi.com/
 
 # Build Instructions
-1. Run "npm start" to host locally
-2. To build, run "npm run build"
 1. Run "npm install" and "npm install chart.js react-chartjs-2" if necessary
 2. Run "npm start" to host locally
 3. To build, run "npm run build"

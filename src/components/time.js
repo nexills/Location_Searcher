@@ -23,26 +23,31 @@ function Time(props) {
 
     function localChange(event) {
         var newinput = event.target.value;
-        localchange(newinput);
-        if (newinput.length === 4) {
-            var minute = (newinput%100+60+difference%60)%60;
-            var hour = (parseInt(newinput/100)+48+parseInt(difference/60))%24;
-            clientchange(String(hour*100+minute).padStart(4,'0'));
+        if (newinput > 0 && newinput < 2400) {
+            localchange(newinput);
+            if (newinput.length === 4) {
+                var minute = (newinput%100+60+difference%60)%60;
+                var hour = (parseInt(newinput/100)+48+parseInt(difference/60))%24;
+                clientchange(String(hour*100+minute).padStart(4,'0'));
+        }
         }
     }
+
     function clientChange(event) {
         var newinput = event.target.value;
-        clientchange(newinput);
-        if (newinput.length === 4) {
-            var minute = (newinput%100+60-difference%60)%60;
-            var hour = (parseInt(newinput/100)+48-parseInt(difference/60))%24;
-            localchange(String(hour*100+minute).padStart(4,'0'));
-    }
+        if (newinput > 0 && newinput < 2400) {
+            clientchange(newinput);
+            if (newinput.length === 4) {
+                var minute = (newinput%100+60-difference%60)%60;
+                var hour = (parseInt(newinput/100)+48-parseInt(difference/60))%24;
+                localchange(String(hour*100+minute).padStart(4,'0'));
+            }
+        }
     }
 
     return (
     <div>
-        <p className="centre"> {timezone} {offset >= 0 ? 
+        <div className="centre"> {timezone} {offset >= 0 ? 
             "(GMT+" +parseInt(offset/3600)+")" :
             "(GMT" + parseInt(offset/3600)+")"}
             {difference >= 0 ? (
@@ -50,7 +55,7 @@ function Time(props) {
                     <p>{(-difference/60).toFixed(1)} hours behind your timezone</p>
                 )
             }
-            </p>
+            </div>
         <p className="centre"> Local Time: </p>
         <p className='digital_clock'>{
             ((new Date(time).getUTCHours()+parseInt(offset/3600)+24)%24).toLocaleString(undefined, {minimumIntegerDigits: 2})+ 
@@ -65,11 +70,12 @@ function Time(props) {
         </div>
         <div className="calculator">
             <h3> Timezone Converter</h3>
+            <p> In 24 hours form</p>
             <label className='leftfloat'>Your timezone</label>
             <label className='rightfloat'>This timezone</label>
             <br/> <br/>
-            <input onChange={localChange} value={local} className='leftfloat' id="localtime"></input>
-            <input onChange={clientChange} value={client} className='rightfloat' id="clienttime"></input>
+            <input onChange={localChange} value={local} className='leftinput'></input>
+            <input onChange={clientChange} value={client} className='rightinput'></input>
         </div>
     </div>
     );
