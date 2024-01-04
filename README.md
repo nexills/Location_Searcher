@@ -1,5 +1,5 @@
 # Location_Searcher
-This is a primarily weather website that allows users to search for weather information in a location. This website allow lets user to view weather forecast, time, currency and country information of the location searched.
+This is a primarily weather website that allows users to search for weather information in a location. This website lets user view weather forecast, time, currency and country information of the location searched. Perfect when you are packing for your vacation halfway across the world!
 
 Current features
 - searching locations
