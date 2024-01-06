@@ -14,6 +14,7 @@ function Time(props) {
 
     const [local, localchange] = useState(0);
     const [client, clientchange] = useState(difference);
+    // update the current local time timer
     useEffect(() => {
         var timer = setInterval(() => timechange(new Date()), 1000);
         return function clean() {
@@ -21,6 +22,7 @@ function Time(props) {
         }
     })
 
+    // handle the timezone converter
     function localChange(event) {
         var newinput = event.target.value;
         if (newinput >= 0 && newinput < 2400 && newinput.length <= 4) {

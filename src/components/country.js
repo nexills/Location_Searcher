@@ -5,6 +5,7 @@ import './country.css';
 function Country(props) {
     const {country} = props;
 
+    // handle to expand button (which show more information)
     var [isOpen, change] = useState(false);
     var [buttontext, changetext] = useState("Show more");
     function handleClick() {

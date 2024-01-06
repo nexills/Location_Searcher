@@ -27,6 +27,7 @@ function Result() {
     
     useEffect(() => {
         try {
+            // get data from external apis
             fetch("https://api.open-meteo.com/v1/forecast?latitude=" + info[1] +
             "&longitude=" + info[2] + "&current=temperature_2m,relative_humidity_2m,weather_code,"+
             "apparent_temperature,precipitation&daily=temperature_2m_max,temperature_2m_min,"+
@@ -35,6 +36,7 @@ function Result() {
                 return response.json();
             })
             .then((forecast) => {
+                // build a graph
                 data_change({
                     labels: forecast["daily"]["time"].map((x)=>
                         x.slice(8, 10) + "/" + x.slice(5, 7)
@@ -67,6 +69,7 @@ function Result() {
         
     useEffect(() => {
         try {
+            // getting country information and currency information
             var country_name = info[0].split(",");
             country_name = country_name[country_name.length - 1];
             country_name = country_name.replaceAll("_", " ").trim();
@@ -88,7 +91,7 @@ function Result() {
                 countrychange(country_data.slice(index,index+1));
                 // get the name of the currency
                 var keys = Object.keys(country_data[index]["currencies"]);
-
+                // get currency conversion rates, if supported
                 if (supported_currency.includes(keys[0])) {
                     fetch("https://api.freecurrencyapi.com/v1/latest?apikey=fca_live_Bs4cRDRARUX3w1aGLxlc"+
                     "QQK4HndHWIUjzFmI4rzv&currencies="+keys[0]+"&base_currency=CAD")

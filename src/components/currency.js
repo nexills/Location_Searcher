@@ -11,6 +11,7 @@ function Currency(props) {
     const [local, localchange] = useState(0);
     const [client, clientchange] = useState(0);
     
+    // functions to handle the currency converter
     function localChange(event) {
         var newinput = event.target.value;
         if (newinput > 0) {

@@ -23,6 +23,7 @@ function Current(props) {
     const {condition} = props;
     var code = parseInt(condition["weather_code"]);
     var weather_type = "";
+    // a converter from weather code to weather conditions
     switch (code) {
         case 0:
             weather_type = "Clear ☼";
