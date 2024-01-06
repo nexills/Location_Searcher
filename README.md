@@ -8,6 +8,9 @@ This is a primarily weather website that allows users to search for weather info
 - currency display and currency converter
 - country information of the location
 
+## Technologies
+HTML, CSS, Javascript and React JS
+
 ## API Used
 For searching location and geocoding
 https://locationiq.com/demo
